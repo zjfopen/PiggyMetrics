@@ -67,7 +67,7 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  auth-mongodb:
+  piggy-mongodb:
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: sqshq/piggymetrics-mongodb
@@ -92,17 +92,6 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  account-mongodb:
-    environment:
-      INIT_DUMP: account-service-dump.js
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-mongodb
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
   statistics-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -113,16 +102,6 @@ services:
     depends_on:
       config:
         condition: service_healthy
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
-  statistics-mongodb:
-    environment:
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-mongodb
-    restart: always
     logging:
       options:
         max-size: "10m"
@@ -143,15 +122,7 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  notification-mongodb:
-    image: sqshq/piggymetrics-mongodb
-    restart: always
-    environment:
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+
 
   monitoring:
     environment:
